@@ -9,3 +9,80 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+
+  @@map("users")
+}
+
+model Term {
+  id          Int          @id @default(autoincrement())
+  number      Int          @unique
+  disciplines Discipline[]
+  tests       TestsTerm[]
+
+  @@map("terms")
+}
+
+model Discipline {
+  id        Int                 @id @default(autoincrement())
+  name      String              @unique
+  createdAt DateTime            @default(now())
+  termId    Int
+  term      Term                @relation(fields: [termId], references: [id])
+  teachers  DisciplineTeacher[]
+
+  @@map("disciplines")
+}
+
+model Teacher {
+  id          Int                 @id @default(autoincrement())
+  name        String              @unique
+  createdAt   DateTime            @default(now())
+  disciplines DisciplineTeacher[]
+
+  @@map("teachers")
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  tests     Test[]
+
+  @@map("categories")
+}
+
+model Test {
+  id                  Int               @id @default(autoincrement())
+  name                String
+  pdfUrl              String
+  createdAt           DateTime          @default(now())
+  categoryId          Int
+  disciplineTeacherId Int
+  category            Category          @relation(fields: [categoryId], references: [id])
+  disciplineTeacher   DisciplineTeacher @relation(fields: [disciplineTeacherId], references: [id])
+  terms               TestsTerm[]
+
+  @@map("tests")
+}
+
+model DisciplineTeacher {
+  id           Int        @id @default(autoincrement())
+  disciplineId Int
+  teacherId    Int
+  discipline   Discipline @relation(fields: [disciplineId], references: [id])
+  teacher      Teacher    @relation(fields: [teacherId], references: [id])
+  tests        Test[]
+}
+
+model TestsTerm {
+  id     Int  @id @default(autoincrement())
+  testId Int
+  termId Int
+  term   Term @relation(fields: [termId], references: [id])
+  test   Test @relation(fields: [testId], references: [id])
+}
