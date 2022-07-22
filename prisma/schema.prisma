@@ -23,7 +23,6 @@ model Term {
   id          Int          @id @default(autoincrement())
   number      Int          @unique
   disciplines Discipline[]
-  tests       TestsTerm[]
 
   @@map("terms")
 }
@@ -65,7 +64,6 @@ model Test {
   disciplineTeacherId Int
   category            Category          @relation(fields: [categoryId], references: [id])
   disciplineTeacher   DisciplineTeacher @relation(fields: [disciplineTeacherId], references: [id])
-  terms               TestsTerm[]
 
   @@map("tests")
 }
@@ -77,12 +75,4 @@ model DisciplineTeacher {
   discipline   Discipline @relation(fields: [disciplineId], references: [id])
   teacher      Teacher    @relation(fields: [teacherId], references: [id])
   tests        Test[]
-}
-
-model TestsTerm {
-  id     Int  @id @default(autoincrement())
-  testId Int
-  termId Int
-  term   Term @relation(fields: [termId], references: [id])
-  test   Test @relation(fields: [testId], references: [id])
 }
