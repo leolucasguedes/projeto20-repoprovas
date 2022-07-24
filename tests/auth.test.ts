@@ -5,7 +5,7 @@ import {
 	alreadyRegisteredUser,
 	dataWhithoutField,
 	newUser,
-	newUserWithoutfields,
+	newUserWithoutField,
 	wrongEmail,
 	wrongPassword,
 } from "./factories/userFactory"
@@ -20,7 +20,7 @@ describe("SignUp", () => {
 	it("Try to create user with some field missing and return 422", async () => {
 		const response = await supertest(app)
 			.post("/signup")
-			.send(newUserWithoutfields())
+			.send(newUserWithoutField())
 		expect(response.status).toEqual(422)
 	})
 	it("Try create user with already existing email and return 409", async () => {

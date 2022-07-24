@@ -7,7 +7,7 @@ const newUser = () => {
 	}
 }
 
-const newUserWithoutfields = () => {
+const newUserWithoutField = () => {
 	return {
 		email: faker.internet.email(),
 	}
@@ -49,7 +49,7 @@ const dataWhithoutField = () => {
 
 export {
 	newUser,
-	newUserWithoutfields,
+	newUserWithoutField,
 	alreadyRegisteredUser,
 	alreadyRegisteredData,
 	wrongPassword,
