@@ -28,51 +28,46 @@ model Term {
 }
 
 model Discipline {
-  id        Int                 @id @default(autoincrement())
-  name      String              @unique
-  createdAt DateTime            @default(now())
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  createdAt DateTime  @default(now())
   termId    Int
-  term      Term                @relation(fields: [termId], references: [id])
-  teachers  DisciplineTeacher[]
+  term      Term      @relation(fields: [termId], references: [id])
+  teachers  Teacher[]
+  tests     Test[]
 
   @@map("disciplines")
 }
 
 model Teacher {
-  id          Int                 @id @default(autoincrement())
-  name        String              @unique
-  createdAt   DateTime            @default(now())
-  disciplines DisciplineTeacher[]
+  id          Int          @id @default(autoincrement())
+  name        String       @unique
+  createdAt   DateTime     @default(now())
+  tests       Test[]
+  disciplines Discipline[]
 
   @@map("teachers")
 }
 
 model Category {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  tests     Test[]
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  tests Test[]
 
   @@map("categories")
 }
 
 model Test {
-  id                  Int               @id @default(autoincrement())
-  name                String
-  pdfUrl              String
-  createdAt           DateTime          @default(now())
-  categoryId          Int
-  disciplineTeacherId Int
-  category            Category          @relation(fields: [categoryId], references: [id])
-  disciplineTeacher   DisciplineTeacher @relation(fields: [disciplineTeacherId], references: [id])
+  id           Int        @id @default(autoincrement())
+  name         String
+  pdfUrl       String
+  createdAt    DateTime   @default(now())
+  categoryId   Int
+  teacherId    Int
+  disciplineId Int
+  category     Category   @relation(fields: [categoryId], references: [id])
+  teachers     Teacher    @relation(fields: [teacherId], references: [id])
+  discipline   Discipline @relation(fields: [disciplineId], references: [id])
 
   @@map("tests")
-}
-
-model DisciplineTeacher {
-  id           Int        @id @default(autoincrement())
-  disciplineId Int
-  teacherId    Int
-  discipline   Discipline @relation(fields: [disciplineId], references: [id])
-  teacher      Teacher    @relation(fields: [teacherId], references: [id])
-  tests        Test[]
 }

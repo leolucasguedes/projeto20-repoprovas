@@ -46,35 +46,12 @@ const main = async () => {
     { number: 5 },
     { number: 6 },
   ];
-  const DisciplineTeacher = [
-    {
-      disciplineId: 1,
-      teacherId: 1,
-    },
-    {
-      disciplineId: 2,
-      teacherId: 1,
-    },
-    {
-      disciplineId: 3,
-      teacherId: 1,
-    },
-    {
-      disciplineId: 4,
-      teacherId: 2,
-    },
-    {
-      disciplineId: 5,
-      teacherId: 2,
-    },
-  ];
 
   await prisma.user.createMany({ data: users });
   await prisma.discipline.createMany({ data: disciplines });
   await prisma.teacher.createMany({ data: teachers });
   await prisma.category.createMany({ data: categories });
   await prisma.term.createMany({ data: terms });
-  await prisma.disciplineTeacher.createMany({ data: DisciplineTeacher });
 };
 main()
   .catch((e) => {
