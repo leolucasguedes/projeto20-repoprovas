@@ -7,6 +7,14 @@ export async function createTest(test: CreateTestData) {
   await prisma.test.create({ data: test });
 }
 
+export async function findTeacherById(id: number) {
+  return await prisma.teacher.findUnique({where: { id }});
+}
+
+export async function findDisciplineById(id: number) {
+  return await prisma.discipline.findUnique({where: { id }});
+}
+
 export async function findTestsByDiscipline() {
   return await prisma.term.findMany({
     include: {

@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 
-import prisma from "../src/config/database";
+import prisma from "../src/config/database.js";
 
 const main = async () => {
   const hashedPassword = bcrypt.hashSync("123456", 10);

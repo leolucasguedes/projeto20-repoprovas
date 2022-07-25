@@ -1,8 +1,8 @@
 import app from "../src/app/app.js"
 import supertest from "supertest"
-import { createNewTest } from "./factories/testFactory"
-import { getToken } from "./factories/tokenFactory"
-import { alreadyRegisteredData } from "./factories/userFactory"
+import { createNewTest } from "./factories/testFactory.js"
+import { getToken } from "./factories/tokenFactory.js"
+import { alreadyRegisteredData } from "./factories/userFactory.js"
 
 let token: string
 

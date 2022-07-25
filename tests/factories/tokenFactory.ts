@@ -1,5 +1,5 @@
 import app from "../../src/app/app.js"
-import { CreateUserData } from "../../src/repositories/authRepository"
+import { CreateUserData } from "../../src/schemas/authSchema.js"
 import supertest from "supertest"
 
 const getToken = async (user: CreateUserData) => {

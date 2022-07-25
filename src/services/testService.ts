@@ -8,15 +8,8 @@ import AppLog from "../events/AppLog.js";
 import "../config/setup.js"
 
 export async function addNewTest(testInfo: TR.CreateTestData) {
-  const category = await CR.findById(testInfo.categoryId);
-  if (!category) {
-    throw new AppError(
-      "Category not found",
-      404,
-      "Category not found",
-      "Ensure to provide a valid category"
-    );
-  }
+  
+  await verifyTest(testInfo.categoryId, testInfo.disciplineId, testInfo.teacherId);
 
   await TR.createTest(testInfo);
 
@@ -54,4 +47,36 @@ export async function getTestsByTeacher() {
       }),
     };
   });
+}
+
+export async function verifyTest(categoryId: number, disciplineId: number, teacherId: number) {
+  const category = await CR.findById(categoryId);
+  if (!category) {
+    throw new AppError(
+      "Category not found",
+      404,
+      "Category not found",
+      "Ensure to provide a valid category"
+    );
+  }
+  const teacher = await TR.findTeacherById(teacherId);
+  if (!teacher) {
+    throw new AppError(
+      "Teacher not found",
+      404,
+      "Teacher not found",
+      "Ensure to provide a valid teacher"
+    );
+  }
+  const discipline = await TR.findDisciplineById(disciplineId);
+  if (!discipline) {
+    throw new AppError(
+      "Discipline not found",
+      404,
+      "Discipline not found",
+      "Ensure to provide a valid discipline"
+    );
+  }
+
+  AppLog("Service", "Test credentials checked");
 }

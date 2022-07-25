@@ -44,7 +44,7 @@ export async function loginUser(userInfo: CreateUserData) {
   if (!bcrypt.compareSync(userInfo.password, user.password)) {
     throw new AppError(
       "Password error",
-      404,
+      401,
       "Password error",
       "Ensure to provide the right password"
     );
