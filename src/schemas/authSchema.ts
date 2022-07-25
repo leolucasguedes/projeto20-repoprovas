@@ -1,6 +1,7 @@
 import Joi from "joi";
+import { User } from "@prisma/client";
 
-import { CreateUserData } from "../repositories/authRepository.js";
+export type CreateUserData = Omit<User, "id" | "createdAt">;
 
 export type SignUpBody = CreateUserData & { confirmPassword: string };
 

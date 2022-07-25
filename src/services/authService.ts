@@ -6,11 +6,14 @@ import * as AR from "../repositories/authRepository.js";
 import AppError from "../config/error.js";
 import AppLog from "../events/AppLog.js";
 
+import { CreateUserData, SignUpBody } from "../schemas/authSchema.js";
+
 import "../config/setup.js"
 
-export async function createUser(userInfo: AR.CreateUserData) {
+export async function createUser(userInfo: SignUpBody) {
+  const { email, password } = userInfo;
   const SALT_ROUNDS: number = +process.env.SALT_ROUNDS || 10;
-  const userRegistered = await AR.findByEmail(userInfo.email);
+  const userRegistered = await AR.findByEmail(email);
   if (userRegistered) {
     throw new AppError(
       "Email alrealdy registered",
@@ -20,13 +23,14 @@ export async function createUser(userInfo: AR.CreateUserData) {
     );
   }
 
-  userInfo.password = bcrypt.hashSync(userInfo.password, SALT_ROUNDS);
+  const user = { email, password };
+  user.password = bcrypt.hashSync(user.password, SALT_ROUNDS);
 
-  await AR.createUser(userInfo);
+  await AR.createUser(user);
   AppLog("Service", "User Created");
 }
 
-export async function loginUser(userInfo: AR.CreateUserData) {
+export async function loginUser(userInfo: CreateUserData) {
   const user = await AR.findByEmail(userInfo.email);
 
   if (!user) {

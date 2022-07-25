@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 
 import * as AS from "../services/authService.js";
-import { CreateUserData } from "../repositories/authRepository.js";
-import { SignUpBody } from "../schemas/authSchema.js";
+import { CreateUserData, SignUpBody } from "../schemas/authSchema.js";
 
 export async function registerUser(req: Request, res: Response) {
   const userInfo: SignUpBody = req.body;

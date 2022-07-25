@@ -6,5 +6,6 @@ export const testSchema = Joi.object<CreateTestData>({
   name: Joi.string().required(),
   pdfUrl: Joi.string().uri().required(),
   categoryId: Joi.number().required(),
-  disciplineTeacherId: Joi.number().required()
+  disciplineId: Joi.number().required(),
+  teacherId: Joi.number().required()
 });

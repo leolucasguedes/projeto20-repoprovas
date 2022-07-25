@@ -1,7 +1,6 @@
-import { User } from "@prisma/client";
 import prisma from "../config/database.js";
 
-export type CreateUserData = Omit<User, "id" | "createdAt">;
+import { CreateUserData } from "../schemas/authSchema.js";
 
 export async function createUser(user: CreateUserData) {
   await prisma.user.create({ data: user });
