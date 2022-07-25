@@ -1,11 +1,11 @@
-import * as TR from "../repositories/testRepository.js";
-import * as CR from "../repositories/categoryRepository.js";
-import * as TMR from "../repositories/termRepository.js";
+import * as TR from "../repositories/testRepository";
+import * as CR from "../repositories/categoryRepository";
+import * as TMR from "../repositories/termRepository";
 
-import AppError from "../config/error.js";
-import AppLog from "../events/AppLog.js";
+import AppError from "../config/error";
+import AppLog from "../events/AppLog";
 
-import "../config/setup.js"
+import "../config/setup"
 
 export async function addNewTest(testInfo: TR.CreateTestData) {
   

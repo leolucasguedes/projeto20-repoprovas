@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-import { CreateTestData } from "../repositories/testRepository.js";
+import { CreateTestData } from "../repositories/testRepository";
 
 export const testSchema = Joi.object<CreateTestData>({
   name: Joi.string().required(),

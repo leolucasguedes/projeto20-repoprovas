@@ -1,5 +1,3 @@
-import chalk from "chalk";
-
 interface ITypes {
   [key: string]: string;
 }
@@ -22,11 +20,7 @@ const AppLog = (
     | "Error",
   text: string
 ) => {
-  console.log(
-    chalk.bold[
-      types[type] as "green" | "magenta" | "blue" | "yellow" | "cyan" | "red"
-    ](`[${type}] ${text}`)
-  );
+  console.log((`[${type}] ${text}`));
 };
 
 export default AppLog;

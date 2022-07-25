@@ -1,12 +1,12 @@
 import bcrypt from "bcrypt";
 
-import prisma from "../src/config/database.js";
+import prisma from "../src/config/database";
 
 const main = async () => {
   const hashedPassword = bcrypt.hashSync("123456", 10);
   const users = [
     {
-      email: "leo@driven.com",
+      email: "admin@driven.com",
       password: hashedPassword,
     },
   ];
@@ -48,10 +48,10 @@ const main = async () => {
   ];
 
   await prisma.user.createMany({ data: users });
+  await prisma.term.createMany({ data: terms });
+  await prisma.category.createMany({ data: categories });
   await prisma.discipline.createMany({ data: disciplines });
   await prisma.teacher.createMany({ data: teachers });
-  await prisma.category.createMany({ data: categories });
-  await prisma.term.createMany({ data: terms });
 };
 main()
   .catch((e) => {

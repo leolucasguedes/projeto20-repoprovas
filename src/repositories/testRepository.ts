@@ -1,5 +1,5 @@
 import { Test } from "@prisma/client";
-import prisma from "../config/database.js";
+import prisma from "../config/database";
 
 export type CreateTestData = Omit<Test, "id" | "createdAt">;
 

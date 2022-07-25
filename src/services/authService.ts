@@ -1,14 +1,14 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import * as AR from "../repositories/authRepository.js";
+import * as AR from "../repositories/authRepository";
 
-import AppError from "../config/error.js";
-import AppLog from "../events/AppLog.js";
+import AppError from "../config/error";
+import AppLog from "../events/AppLog";
 
-import { CreateUserData, SignUpBody } from "../schemas/authSchema.js";
+import { CreateUserData, SignUpBody } from "../schemas/authSchema";
 
-import "../config/setup.js"
+import "../config/setup"
 
 export async function createUser(userInfo: SignUpBody) {
   const { email, password } = userInfo;

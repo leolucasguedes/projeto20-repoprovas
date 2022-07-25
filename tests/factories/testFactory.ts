@@ -4,9 +4,9 @@ const createNewTest = () => {
 	return {
 		name: faker.name.findName(),
 		pdfUrl: faker.internet.url(),
-		category: "Projeto",
-		teacher: "Diego Pinho",
-		discipline: "HTML e CSS",
+		categoryId: 1,
+		disciplineId: 1,
+		teacherId: 1
 	}
 }
 

@@ -1,13 +1,16 @@
 import { faker } from "@faker-js/faker"
+import supertest from "supertest"
+import app from "../../src/app/app"
 
 const newUser = () => {
 	return {
 		email: faker.internet.email(),
-		password: faker.internet.password(),
+		password: "12345678",
+		confirmPassword: "12345678"
 	}
 }
 
-const newUserWithoutField = () => {
+const newUserWithoutFields = () => {
 	return {
 		email: faker.internet.email(),
 	}
@@ -15,21 +18,22 @@ const newUserWithoutField = () => {
 
 const alreadyRegisteredUser = () => {
 	return {
-		email: "leo@driven.com",
-		password: faker.internet.password(),
+		email: "admin@driven.com",
+		password: "12345678",
+		confirmPassword: "12345678"
 	}
 }
 
 const alreadyRegisteredData = () => {
 	return {
-		email: "leo@driven.com",
+		email: "admin@driven.com",
 		password: "123456",
 	}
 }
 
 const wrongPassword = () => {
 	return {
-		email: "leo@driven.com",
+		email: "admin@driven.com",
 		password: "a123456",
 	}
 }
@@ -43,16 +47,28 @@ const wrongEmail = () => {
 
 const dataWhithoutField = () => {
 	return {
-		email: "leo@driven.com",
+		email: "admin@driven.com",
 	}
+}
+
+async function generateUserRegistered() {
+    const user ={ 
+        email: faker.internet.email(), 
+        password: "12345678",
+        confirmPassword: "12345678"
+    }
+    await supertest(app).post("/sign-up").send(user)
+    delete user.confirmPassword
+    return user
 }
 
 export {
 	newUser,
-	newUserWithoutField,
+	newUserWithoutFields,
 	alreadyRegisteredUser,
 	alreadyRegisteredData,
 	wrongPassword,
 	wrongEmail,
 	dataWhithoutField,
+	generateUserRegistered
 }
