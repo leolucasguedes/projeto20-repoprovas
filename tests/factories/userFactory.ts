@@ -57,7 +57,7 @@ async function generateUserRegistered() {
         password: "12345678",
         confirmPassword: "12345678"
     }
-    await supertest(app).post("/sign-up").send(user)
+    await supertest(app).post("/signup").send(user)
     delete user.confirmPassword
     return user
 }

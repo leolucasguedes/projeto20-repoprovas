@@ -7,7 +7,7 @@ import * as TC from "../controllers/testController"
 
 const testRouter = Router();
 
-testRouter.post("/tests", validSchema(testSchema, "./test"), TC.addTest);
+testRouter.post("/tests", validSchema(testSchema, "./test"), validToken, TC.addTest);
 testRouter.get("/testsByDiscipline", validToken, TC.getTestsByDiscipline);
 testRouter.get("/testsByTeacher", validToken, TC.getTestsByTeacher);
 

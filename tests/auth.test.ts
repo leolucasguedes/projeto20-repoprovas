@@ -4,10 +4,6 @@ import supertest from "supertest"
 import * as UF from "./factories/userFactory"
 
 describe("SignUp", () => {
-	afterAll(async () => {
-		await prisma.$executeRaw`TRUNCATE TABLE users`
-		await prisma.$disconnect();
-	  });
 	it("Create user and return status code 201", async () => {
 		const response = await supertest(app)
 			.post("/signup")
@@ -58,3 +54,7 @@ describe("SignIn", () => {
 		expect(response.status).toBe(422)
 	})
 })
+afterAll(async () => {
+	await prisma.$executeRaw`TRUNCATE TABLE users`
+	await prisma.$disconnect();
+  });

@@ -1,4 +1,6 @@
 import { faker } from "@faker-js/faker"
+import supertest from "supertest"
+import app from "../../src/app/app"
 
 const createNewTest = () => {
 	return {
@@ -10,4 +12,13 @@ const createNewTest = () => {
 	}
 }
 
-export { createNewTest }
+async function generateTest(token: string) {
+    const test = createNewTest();
+    await supertest(app)
+	.post("/tests")
+	.set("authorization", `Bearer ${token}`)
+	.send(test)
+	return test;
+}
+
+export { createNewTest, generateTest }
